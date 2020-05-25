@@ -1,0 +1,19 @@
+----------------------------1----------------------------
+Ip/Dns: webcode.me
+Port: 80
+Request: GET / HTTP/1.1\r\nHost: webcode.me\r\nAccept: text/html\r\n\r\n
+
+----------------------------2----------------------------
+Ip/Dns: brainjar.com
+Port: 80
+Request: GET / HTTP/1.1\r\nHost: webcode.me\r\nAccept: text/html\r\n\r\n
+
+----------------------------3----------------------------
+Ip/Dns: 173.13.214.106
+Port: 80
+Request: GET / HTTP/1.1\r\nHost: play-hookey.com\r\nAccept: /htmltest/header.html\r\n\r\n
+
+----------------------------4----------------------------
+Ip/Dns: 34.76.80.113
+Port: 3213
+Request: *Everything that you wish, to send*
