@@ -441,18 +441,7 @@ namespace PhantomGui
 
             // Determine the color of the brush to draw each item based 
             // on the index of the item to draw.
-            switch (e.Index)
-            {
-                case 0:
-                    myBrush = Brushes.Gainsboro;
-                    break;
-                case 1:
-                    myBrush = Brushes.Orange;
-                    break;
-                case 2:
-                    myBrush = Brushes.Purple;
-                    break;
-            }
+            myBrush = Brushes.Gainsboro;
 
             // Draw the current item text based on the current Font 
             // and the custom brush settings.
