@@ -6,6 +6,7 @@ import datetime
 import os
 import subprocess
 import pathlib
+import re
 
 
 from firebase_admin import credentials
@@ -315,14 +316,17 @@ class SlaveServer:
 
     def __send_to_target(self,next_stop:Packet,slave_client:socket.socket):
         try:
+            a=next_stop.get(Packet.Options.REQUEST).encode().decode("unicode_escape")
+            next_stop.set(a, Packet.Options.REQUEST)
+
             #if the target doesn't reply back, aka google.com:80
-            slave_client.settimeout(30)
+            slave_client.settimeout(120)
 
             slave_client.connect((next_stop.get(Packet.Options.IP),next_stop.get(Packet.Options.PORT)))
-            slave_client.send((next_stop.get(Packet.Options.REQUEST)).encode())
+            slave_client.sendall((next_stop.get(Packet.Options.REQUEST)).encode())
 
             try:
-                reply=slave_client.recv(1024).decode()
+                reply=slave_client.recv(65536).decode()
 
             except:
                 reply="Error 502: Destination has not response back"    

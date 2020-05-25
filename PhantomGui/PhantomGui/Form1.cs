@@ -18,6 +18,7 @@ using Google.Cloud.Firestore.V1;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace PhantomGui
 {
@@ -575,6 +576,7 @@ namespace PhantomGui
 
             data[0].Ip.Add(this.ip_textBox.Text);
             data[0].Port.Add(Convert.ToInt32(this.port_textBox.Text));
+            this.request_textBox.Text = Regex.Unescape(this.request_textBox.Text);
             data[0].Request.Add(this.request_textBox.Text);
             
 

@@ -18,6 +18,7 @@ from NetworkSystem import Network_Properties
 from os import listdir
 from os.path import isfile, join
 from threading import Thread,Lock
+from dns import reversename
 
 
 class SecureClient():
@@ -218,7 +219,15 @@ class SecureClient():
         number=0
         
         file_format = ".html" if("html" in reply) else ".txt"
+
         file_name = str(self.__PROPERTIES_DST.get(Packet.Options.IP)) + " " + str(self.__PROPERTIES_DST.get(Packet.Options.PORT))
+
+        if(file_format==".html"):
+            try:
+               reply=reply[reply.index("<!DOCTYPE html>"):len(reply)]
+            except:
+               reply=reply[reply.index("<html>"):len(reply)]    
+
 
         files = [f for f in listdir(self.__REPLY_FLODER_PATH) if isfile(join(self.__REPLY_FLODER_PATH, f))]
 
@@ -227,6 +236,10 @@ class SecureClient():
                 number+=1
 
         file_name = self.__REPLY_FLODER_PATH + "\\" + file_name + " " + str(number) + file_format
+
+
+        reply=reply.replace("\\r",r'\r')
+        reply=reply.replace("\\n","")
 
         writer=open(file_name,'w')
         writer.write(reply)
